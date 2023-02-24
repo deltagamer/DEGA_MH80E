@@ -1,13 +1,13 @@
 DEGA: MH-80E Shadowhawk Modification
 ==============
 
-![MH80E Front View](https://raw.githubusercontent.com/deltagamer/DEGA_MH60E/main/Release_Notes/20230224145138_1.jpg)
+![MH80E Front View](https://raw.githubusercontent.com/deltagamer/DEGA_MH60E/main/Release_Notes/20230224150846_1.jpg)
 
 Features
 =========
 * Forward facing miniguns
 * Copilot camera
-* Virtual Arsenal Doors
+* Passenger FFV
 
 Whats Planned
 =========
