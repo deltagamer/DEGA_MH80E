@@ -1,4 +1,4 @@
-DEGA: MH-80E Shadowhawk Modification
+DEGA: MH-80E Shadow Hawk Modification
 ==============
 
 ![MH80E Front View](https://raw.githubusercontent.com/deltagamer/DEGA_MH60E/main/Release_Notes/20230224150846_1.jpg)
