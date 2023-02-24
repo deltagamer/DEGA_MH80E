@@ -4,13 +4,13 @@ class MainTurret;
 class Turrets;
 class CopilotTurret;
 class AnimationSources;
+class CargoTurret;
 class CfgPatches 
 {
 	class DEGA_Vehicles_MH80E 
 	{
 		units[] = 
 		{
-			"DEGA_B_Heli_Transport_01_Empty_F",
 		    "DEGA_B_Heli_Transport_01_dynamicLoadout_F"		
 		};
 		weapons[] = {};
@@ -43,129 +43,14 @@ class VehicleSystemsTemplateRightPilot: DefaultVehicleSystemsDisplayManagerRight
 {
 	class components;
 };
-class CargoTurret;
 class CfgVehicles
 {
 	class B_Heli_Transport_01_F;
-	class DEGA_B_Heli_Transport_01_Empty_F : B_Heli_Transport_01_F
-	{
-		displayName="UH-80 Ghost Hawk (Unarmed)";
-        selectionFireAnim="";		
-		class Turrets: Turrets
-		{
-			class CopilotTurret: CopilotTurret
-			{
-				CanEject=0;
-				gunnerAction="pilot_Heli_Transport_01";
-				gunnerInAction="pilot_Heli_Transport_01";
-				memoryPointsGetInGunner="pos copilot";
-				memoryPointsGetInGunnerDir="pos copilot dir";
-				gunnerGetInAction="GetInHeli_Transport_01Cargo";
-				gunnerGetOutAction="GetOutLow";
-				preciseGetInOut=0;
-				GunnerDoor="";
-				gunnerLeftHandAnimName="lever_copilot";
-				gunnerRightHandAnimName="stick_copilot";
-				gunnerLeftLegAnimName="PedalL";
-				gunnerRightLegAnimName="PedalR";
-				proxyIndex=3;
-				LODTurnedIn=1100;
-				LODTurnedOut=1100;
-				gunnerCompartments="Compartment3";
-				commanding=-3;
-				selectionFireAnim="";
-				class ViewGunner: ViewPilot
-				{
-				};
-				class Components
-				{
-					class VehicleSystemsDisplayManagerComponentLeft: VehicleSystemsTemplateLeftPilot
-					{
-					};
-					class VehicleSystemsDisplayManagerComponentRight: VehicleSystemsTemplateRightPilot
-					{
-					};
-				};
-				class Hitpoints
-				{
-				};
-			};
-			class CargoTurret_01: CargoTurret 						/// position for Firing from Vehicles
-			{
-				gunnerAction                = "dega_leftgunner_heli_transport_01"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01 
-				gunnerInAction              = "dega_leftgunner_heli_transport_01";	/// generic animation for sitting inside with rifle ready gunner_Heli_Transport_01		
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
-				memoryPointsGetInGunner 	= "pos gunner";		/// specific memory points to allow choice of position
-				memoryPointsGetInGunnerDir 	= "pos gunner dir";	/// direction of get in action
-				gunnerName 					= "Passenger (Left Window Seat)";	/// name of the position in the Action menu
-				proxyIndex 					= 1;					/// what cargo proxy is used according to index in the model
-				minElev 				    = -50;
-				maxElev 				    = 15;
-				initElev 				    = -15;
-				minTurn 				    = 15;
-				maxTurn 				    = 160;
-				initTurn 				    = 0;
-				isPersonTurret 				= 0;					/// enables firing from vehicle functionality
-				ejectDeadGunner 			= 0;					/// seatbelts included
-				enabledByAnimationSource 	= "";				/// doesn't work unless the said animation source is 1
-				gunnerDoor="";
-				usepip = 0;
-				gunnerOutOpticsModel = "";
-				gunnerOpticsModel = "";
-				startEngine = 0;
-	            outGunnerMayFire = 0;
-                inGunnerMayFire = 0;
-				commanding=-2;
-				memoryPointGunnerOptics="";
-				LODTurnedIn = 1000;
-				LODTurnedOut = 1000;
-				proxyType = CPGunner;
-				selectionFireAnim="zasleh";
-				soundAttenuationTurret="HeliAttenuationGunner";
-				showAsCargo = 1;
-				hideWeaponsGunner = 1;
-			};
-			class CargoTurret_02: CargoTurret 						/// position for Firing from Vehicles
-			{
-				gunnerAction                = "dega_rightgunner_heli_transport_01"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
-				memoryPointsGetInGunner 	= "pos gunner2";		/// specific memory points to allow choice of position
-				memoryPointsGetInGunnerDir 	= "pos gunner2 dir";	/// direction of get in action
-				gunnerName 					= "Passenger (Right Window Seat)";	/// name of the position in the Action menu
-				proxyIndex 					= 2;					/// what cargo proxy is used according to index in the model
-				minElev 				    = -50;
-				maxElev 				    = 15;
-				initElev 				    = -15;				
-				minTurn 				    = -160;
-				maxTurn 				    = -15;
-				initTurn 				    = 0;
-				isPersonTurret 				= 0;					/// enables firing from vehicle functionality
-				ejectDeadGunner 			= 0;					/// seatbelts included
-				enabledByAnimationSource 	= "";				/// doesn't work unless the said animation source is 1
-				gunnerDoor="";
-				usepip = 0;
-				gunnerOutOpticsModel = "";
-				gunnerOpticsModel = "";
-				startEngine = 0;
-	            outGunnerMayFire = 0;
-                inGunnerMayFire = 0;
-				commanding=-2;
-				memoryPointGunnerOptics="";
-				LODTurnedIn = 1000;
-				LODTurnedOut = 1000;
-				proxyType = CPGunner;
-				selectionFireAnim="zasleh_1";
-				soundAttenuationTurret="HeliAttenuationGunner";
-				showAsCargo = 1;
-				hideWeaponsGunner = 1;
-			};				
-		};	
-	};
 	class DEGA_B_Heli_Transport_01_dynamicLoadout_F : B_Heli_Transport_01_F
 	{	
 		author="Deltagamer";	
 		editorPreview = "";
+		transportSoldier = 8;	
 		_generalMacro="DEGA_Heli_Transport_01_dynamicLoadout_F";
 		scope = 2;
 		icon="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\map_heli_transport_01_armed_ca.paa";
@@ -173,7 +58,7 @@ class CfgVehicles
 		scopeCurator = 2;
 		scopeArsenal = 2;
 		forceInGarage=1;
-		displayName="MH-80E Shadow";
+		displayName="MH-80E Shadow Hawk";
 		side=1;
 		faction="BLU_F";
 		crew="B_Helipilot_F";
@@ -192,13 +77,11 @@ class CfgVehicles
 		};		
 		weapons[]=
 		{
-			"DEGA_LMG_Minigun_Transport", // LMG_Minigun_Transport LMG_Minigun_Transport2
-			"missiles_DAR"
+			"DEGA_LMG_Minigun_Transport" // LMG_Minigun_Transport LMG_Minigun_Transport2
 		};
 		magazines[]=
 		{
-			"DEGA_4000Rnd_65x39_Belt_Tracer_Red", //  2000Rnd_65x39_Belt_Tracer_Red
-			"PylonRack_12Rnd_missiles"
+			"DEGA_4000Rnd_65x39_Belt_Tracer_Red" //  2000Rnd_65x39_Belt_Tracer_Red
 		};	
 		memoryPointGun[]=
 		{
@@ -222,11 +105,12 @@ class CfgVehicles
 				source="door";
 				animPeriod=1.6;
 				initPhase=0;
-				displayName = "Doors"; 
+				displayName = "Door (Left)"; 
 				author = "Deltagamer"; 				
 			};
 			class Door_R: Door_L
 			{
+				displayName = "Door (Right)"; 
 			};
 			class Holder
 			{
@@ -271,6 +155,9 @@ class CfgVehicles
 		{
 			class CopilotTurret: CopilotTurret
 			{
+				canLock = 2;	
+				proxyType = CPGunner;		
+				inGunnerMayFire = true;				
 				CanEject=0;
 				gunnerAction="pilot_Heli_Transport_01";
 				gunnerInAction="pilot_Heli_Transport_01";
@@ -289,7 +176,6 @@ class CfgVehicles
 				LODTurnedOut=1100;
 				gunnerCompartments="Compartment3";
 				commanding=-3;
-				selectionFireAnim="";
 				class ViewGunner: ViewPilot
 				{
 				};
@@ -305,6 +191,8 @@ class CfgVehicles
 				class Hitpoints
 				{
 				};
+				selectionFireAnim="";	
+				
 			};
 			class CargoTurret_01: CargoTurret 						/// position for Firing from Vehicles
 			{
