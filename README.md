@@ -6,7 +6,6 @@ DEGA: MH-80E Shadowhawk Modification
 Features
 =========
 * Forward facing miniguns
-* Copilot camera
 * Passenger FFV
 
 Whats Planned
@@ -14,7 +13,7 @@ Whats Planned
 
 * Pylons and fuel probe
 * Unarmed Version
-* Physical Nose Camera Model
+* Copilot camera w/ physical Nose Camera Model
 
 License
 =============
