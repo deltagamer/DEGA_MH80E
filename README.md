@@ -1,7 +1,7 @@
 DEGA: MH-80E Shadowhawk Modification
 ==============
 
-![AH99E Front View](https://raw.githubusercontent.com/deltagamer/DEGA_AH99E/main/Release_Notes/20210218215041_1.jpg)
+![MH80E Front View](https://raw.githubusercontent.com/deltagamer/DEGA_AH99E/main/Release_Notes/20210218215041_1.jpg)
 
 Features
 =========
@@ -13,6 +13,8 @@ Whats Planned
 =========
 
 * Pylons and fuel probe
+* Unarmed Version
+* Physical Nose Camera Model
 
 License
 =============
