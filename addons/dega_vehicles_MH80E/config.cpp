@@ -50,7 +50,7 @@ class CfgVehicles
 	{	
 		author="Deltagamer";	
 		editorPreview = "";
-		transportSoldier = 6;	
+		transportSoldier = 4;	
 		_generalMacro="DEGA_Heli_Transport_01_dynamicLoadout_F";
 		scope = 2;
 		icon="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\map_heli_transport_01_armed_ca.paa";
@@ -348,7 +348,49 @@ class CfgVehicles
 				soundAttenuationTurret="";
 				showAsCargo = 1;
 				hideWeaponsGunner = 0;
-			};			
+			};
+			class CargoTurret_LeftFloorDoor: CargoTurret 						/// position for Firing from Vehicles
+			{
+				gunnerGetInAction = "GetInLOW";
+				gunnerGetOutAction = "GetOutLOW";
+				CanEject = 1;
+				playerPosition = 4;
+				class dynamicViewLimits
+				{
+					CargoTurret_RightDoor[] = {-65,95};
+				};				
+				gunnerAction                = "dega_passenger_inside_7_leftfloor"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
+				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
+				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
+				memoryPointsGetInGunnerDir 	= "pos cargo dir";	/// direction of get in action
+				gunnerName 					= "Passenger (Left Floor Seat)";	/// name of the position in the Action menu
+				proxyIndex 					= 3;					/// what cargo proxy is used according to index in the model
+				minElev 				    = -50;
+				maxElev 				    = 35;
+				initElev 				    = -15;				
+				minTurn 				    = 10;
+				maxTurn 				    = 100;
+				initTurn 				    = 0;
+				isPersonTurret 				= 1;					/// enables firing from vehicle functionality
+				ejectDeadGunner 			= 0;					/// seatbelts included
+				enabledByAnimationSource 	= "door_L";				/// doesn't work unless the said animation source is 1
+				gunnerDoor="";
+				usepip = 0;
+				gunnerOutOpticsModel = "";
+				gunnerOpticsModel = "";
+				startEngine = 0;
+	            outGunnerMayFire = 1;
+                inGunnerMayFire = 0;
+				commanding=-2;
+				memoryPointGunnerOptics="";
+				LODTurnedIn = 1200;
+				LODTurnedOut = 1200;
+				proxyType = CPCargo;
+				soundAttenuationTurret="";
+				showAsCargo = 1;
+				hideWeaponsGunner = 0;
+			};				
 			class CargoTurret_RightDoor: CargoTurret 						/// position for Firing from Vehicles
 			{
 				gunnerGetInAction = "GetInLOW";
@@ -584,6 +626,7 @@ class CfgMovesBasic
 		dega_leftgunner_heli_transport_01 = "dega_leftgunner_heli_transport_01";
 		
 		dega_passenger_inside_7_left="dega_passenger_inside_7_left_Idle";
+		dega_passenger_inside_7_leftfloor="dega_passenger_inside_7_leftfloor_Idle";		
 	};
 	class Actions
 	{
@@ -731,6 +774,7 @@ class CfgMovesBasic
 			Binoculars="";
 			Obstructed="";
 		};	
+////////////////////////////////////////////////////////////////////////////////////////////////////////////		
 		class dega_passenger_inside_7_leftActions: FFV_BaseActions
 		{
 			upDegree="ManPosCombat";
@@ -891,6 +935,168 @@ class CfgMovesBasic
 			Combat="dega_passenger_inside_7_left_Aim_Pistol";
 			fireNotPossible="dega_passenger_inside_7_left_Obstructed_Pistol";
 			PlayerStand="dega_passenger_inside_7_left_Obstructed_Pistol";
+		};
+////////////////////////////////////////////////////////////////////////////////////////////////////////////		
+		class dega_passenger_inside_7_leftfloorActions: FFV_BaseActions
+		{
+			upDegree="ManPosCombat";
+			stop="dega_passenger_inside_7_leftfloor_Aim";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Aim";
+			default="dega_passenger_inside_7_leftfloor_Aim";
+			Stand="dega_passenger_inside_7_leftfloor_Idle";
+			HandGunOn="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			PrimaryWeapon="dega_passenger_inside_7_leftfloor_Aim";
+			Binoculars="dega_passenger_inside_7_leftfloor_Aim_Binoc";
+			die="dega_passenger_inside_7_leftfloor_Die";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die";
+			civil="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			Obstructed="dega_passenger_inside_7_leftfloor_Obstructed";
+		};
+		class dega_passenger_inside_7_leftfloorIdleUnarmedActions: FFV_BaseActions
+		{
+			upDegree="ManPosNoWeapon";
+			stop="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			default="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			Stand="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			HandGunOn="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			PrimaryWeapon="dega_passenger_inside_7_leftfloor_Aim";
+			Binoculars="dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			civil="dega_passenger_inside_7_leftfloor_Idle_Unarmed";
+			throwGrenade[]=
+			{
+				"GestureThrowGrenadeUna",
+				"Gesture"
+			};
+			GetOutLow="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutLow";
+			GetOutMedium="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutMedium";
+			GetOutHigh="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHigh";
+			GetOutHighZamak="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHighZamak";
+			GetOutHighHemtt="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHighHemtt";
+			GetOutSDV="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHigh";
+		};
+		class dega_passenger_inside_7_leftfloorDeadActions: FFV_BaseActions
+		{
+			stop="dega_passenger_inside_7_leftfloor_Die";
+			default="dega_passenger_inside_7_leftfloor_Die";
+			die="dega_passenger_inside_7_leftfloor_Die";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die";
+		};
+		class dega_passenger_inside_7_leftfloorDeadPistolActions: FFV_BaseActions
+		{
+			stop="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			default="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+		};
+		class dega_passenger_inside_7_leftfloorPistolActions: dega_passenger_inside_7_leftfloorActions
+		{
+			upDegree="ManPosHandGunStand";
+			stop="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			default="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			Binoculars="dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc";
+			throwGrenade[]=
+			{
+				"GestureThrowGrenadePistol",
+				"Gesture"
+			};
+			Stand="dega_passenger_inside_7_leftfloor_Idle_Pistol";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Obstructed="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			GetOutLow="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutLow";
+			GetOutMedium="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutMedium";
+			GetOutHigh="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+			GetOutHighZamak="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighZamak";
+			GetOutHighHemtt="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighHemtt";
+			GetOutSDV="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+		};
+		class dega_passenger_inside_7_leftfloorBinocActions: dega_passenger_inside_7_leftfloorActions
+		{
+			binocOn="";
+			upDegree="ManPosBinocStand";
+			stop="dega_passenger_inside_7_leftfloor_Aim_Binoc";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Aim_Binoc";
+			default="dega_passenger_inside_7_leftfloor_Aim_Binoc";
+		};
+		class dega_passenger_inside_7_leftfloorBinocPistolActions: dega_passenger_inside_7_leftfloorBinocActions
+		{
+			stop="dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc";
+			default="dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			GetOutLow="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutLow";
+			GetOutMedium="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutMedium";
+			GetOutHigh="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+			GetOutHighZamak="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighZamak";
+			GetOutHighHemtt="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighHemtt";
+			GetOutSDV="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+		};
+		class dega_passenger_inside_7_leftfloorBinocUnarmedActions: dega_passenger_inside_7_leftfloorBinocActions
+		{
+			stop="dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc";
+			default="dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			GetOutLow="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutLow";
+			GetOutMedium="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutMedium";
+			GetOutHigh="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHigh";
+			GetOutHighZamak="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHighZamak";
+			GetOutHighHemtt="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHighHemtt";
+			GetOutSDV="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSnonWnonDnon_getOutHigh";
+		};
+		class dega_passenger_inside_7_leftfloorIdleActions: dega_passenger_inside_7_leftfloorActions
+		{
+			upDegree="ManPosStand";
+			stop="dega_passenger_inside_7_leftfloor_Idle";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Idle";
+			default="dega_passenger_inside_7_leftfloor_Idle";
+			Combat="dega_passenger_inside_7_leftfloor_Aim";
+			fireNotPossible="dega_passenger_inside_7_leftfloor_Aim";
+			PlayerStand="dega_passenger_inside_7_leftfloor_Aim";
+		};
+		class dega_passenger_inside_7_leftfloorIdlePistolActions: dega_passenger_inside_7_leftfloorActions
+		{
+			Stand="dega_passenger_inside_7_leftfloor_Idle_Pistol";
+			upDegree="ManPosHandGunStand";
+			stop="dega_passenger_inside_7_leftfloor_Idle_Pistol";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Idle_Pistol";
+			default="dega_passenger_inside_7_leftfloor_Idle_Pistol";
+			Combat="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			fireNotPossible="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			PlayerStand="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			die="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			Unconscious="dega_passenger_inside_7_leftfloor_Die_Pistol";
+			GetOutLow="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutLow";
+			GetOutMedium="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutMedium";
+			GetOutHigh="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+			GetOutHighZamak="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighZamak";
+			GetOutHighHemtt="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHighHemtt";
+			GetOutSDV="AcrgPknlMstpSnonWnonDnon_AmovPercMstpSrasWpstDnon_getOutHigh";
+		};
+		class dega_passenger_inside_7_leftfloorObstructedActions: dega_passenger_inside_7_leftfloorActions
+		{
+			stop="dega_passenger_inside_7_leftfloor_Obstructed";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Obstructed";
+			default="dega_passenger_inside_7_leftfloor_Obstructed";
+			Combat="dega_passenger_inside_7_leftfloor_Aim";
+			fireNotPossible="dega_passenger_inside_7_leftfloor_Obstructed";
+			PlayerStand="dega_passenger_inside_7_leftfloor_Obstructed";
+		};
+		class dega_passenger_inside_7_leftfloorObstructedPistolActions: dega_passenger_inside_7_leftfloorPistolActions
+		{
+			Stand="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			stop="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			stopRelaxed="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			default="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			Combat="dega_passenger_inside_7_leftfloor_Aim_Pistol";
+			fireNotPossible="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
+			PlayerStand="dega_passenger_inside_7_leftfloor_Obstructed_Pistol";
 		};		
     };		
 };
@@ -1595,6 +1801,629 @@ class CfgMovesMaleSdr: CfgMovesBasic
 			actions="dega_passenger_inside_7_leftDeadPistolActions";
 			showHandGun=1;
 		};
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+		class dega_passenger_inside_7_leftfloor_Aim: cargo_base
+		{
+			actions="dega_passenger_inside_7_leftfloorActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim.rtm";
+			speed=100000;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_ToBinoc",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_toObstructed",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Aim_ToPistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.2,
+				"dega_passenger_inside_7_leftfloor_Die",
+				0.1
+			};
+			variantsAI[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Idling",
+				1
+			};
+			variantsPlayer[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Obstructed: cargo_base_idle
+		{
+			actions="dega_passenger_inside_7_leftfloorObstructedActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_obstructed.rtm";
+			speed=1e+010;
+			weaponLowered=0;
+			leftHandIKCurve[]={1};
+			weaponObstructed=1;
+			interpolationRestart=1;
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_fromObstructed",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_fromObstructed: cargo_base_idle
+		{
+			actions="dega_passenger_inside_7_leftfloorActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_fromobstructed.rtm";
+			speed=-0.15000001;
+			looped=0;
+			weaponLowered=0;
+			leftHandIKCurve[]={1};
+			interpolationRestart=1;
+			reverse="dega_passenger_inside_7_leftfloor_toObstructed";
+			minplaytime=0.94999999;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_toObstructed: cargo_base_idle
+		{
+			actions="dega_passenger_inside_7_leftfloorObstructedActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_toobstructed.rtm";
+			speed=-0.15000001;
+			weaponLowered=0;
+			weaponObstructed=1;
+			looped=0;
+			leftHandIKCurve[]={1};
+			interpolationRestart=1;
+			reverse="dega_passenger_inside_7_leftfloor_fromObstructed";
+			minplaytime=0.94999999;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Obstructed",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Obstructed",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Idling: dega_passenger_inside_7_leftfloor_Aim
+		{
+			variantsPlayer[]={};
+			headBobStrength=0;
+			soundEnabled=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim1.rtm";
+			speed=-8;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle: cargo_base_idle
+		{
+			actions="dega_passenger_inside_7_leftfloorIdleActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idle.rtm";
+			speed=100000;
+			aiming="aimingDefault";
+			aimingBody="aimingNo";
+			leftHandIKCurve[]={1};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Aim_ToPistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.2,
+				"dega_passenger_inside_7_leftfloor_Die",
+				0.1
+			};
+			variantsAI[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Idling",
+				1
+			};
+			variantsPlayer[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Idling",
+				1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle_Idling: dega_passenger_inside_7_leftfloor_Idle
+		{
+			variantsPlayer[]={};
+			headBobStrength=0;
+			soundEnabled=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idle1.rtm";
+			speed=-10;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol: cargo_basepistol
+		{
+			actions="dega_passenger_inside_7_leftfloorPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol.rtm";
+			aiming="aimingRifleSlingDefault";
+			aimingBody="aimingUpRifleSlingDefault";
+			speed=100000;
+			variantsAI[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_Idling",
+				1
+			};
+			variantsPlayer[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_Idling",
+				1
+			};
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_ToBinoc",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_FromPistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Idle_Pistol",
+				0.2,
+				"dega_passenger_inside_7_leftfloor_toObstructed_Pistol",
+				0.2,
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.2,
+				"dega_passenger_inside_7_leftfloor_Die_Pistol",
+				0.5
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_Idling: dega_passenger_inside_7_leftfloor_Aim_Pistol
+		{
+			variantsPlayer[]={};
+			headBobStrength=0;
+			soundEnabled=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol1.rtm";
+			speed=-8;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle_Pistol: cargo_base_idle_pistol
+		{
+			actions="dega_passenger_inside_7_leftfloorIdlePistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idlepistol.rtm";
+			speed=100000;
+			aiming="aimingRifleSlingDefault";
+			aimingBody="aimingUpRifleSlingDefault";
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Aim_FromPistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die_Pistol",
+				0.1
+			};
+			variantsAI[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Pistol_Idling",
+				1
+			};
+			variantsPlayer[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Pistol_Idling",
+				1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle_Pistol_Idling: dega_passenger_inside_7_leftfloor_Idle
+		{
+			variantsPlayer[]={};
+			headBobStrength=0;
+			soundEnabled=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idlepistol1.rtm";
+			speed=-10;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Obstructed_Pistol: cargo_base_idle_pistol
+		{
+			actions="dega_passenger_inside_7_leftfloorObstructedPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_obstructed.rtm";
+			speed=1e+010;
+			weaponLowered=0;
+			weaponObstructed=1;
+			interpolationRestart=1;
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_fromObstructed_Pistol",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_fromObstructed_Pistol: cargo_base_idle_pistol
+		{
+			actions="dega_passenger_inside_7_leftfloorPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_fromobstructed.rtm";
+			speed=-0.15000001;
+			weaponLowered=0;
+			interpolationRestart=1;
+			looped=0;
+			reverse="dega_passenger_inside_7_leftfloor_toObstructed_Pistol";
+			minplaytime=0.94999999;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_toObstructed_Pistol: cargo_base_idle_pistol
+		{
+			actions="dega_passenger_inside_7_leftfloorObstructedPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_toobstructed.rtm";
+			speed=-0.15000001;
+			weaponLowered=0;
+			interpolationRestart=1;
+			looped=0;
+			weaponObstructed=1;
+			reverse="dega_passenger_inside_7_leftfloor_fromObstructed_Pistol";
+			minplaytime=0.94999999;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Obstructed_Pistol",
+				0.1
+			};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Obstructed_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_ToPistol: AmovPpneMstpSrasWrflDnon_AmovPpneMstpSrasWpstDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimtopistol.rtm";
+			speed=2;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_ToPistol_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_ToPistol_End: AmovPpneMstpSrasWrflDnon_AmovPpneMstpSrasWpstDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimtopistol_end.rtm";
+			speed=1.875;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_FromPistol: AmovPpneMstpSrasWpstDnon_AmovPpneMstpSrasWrflDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimFrompistol.rtm";
+			speed=2.3076921;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_FromPistol_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_FromPistol_End: AmovPpneMstpSrasWpstDnon_AmovPpneMstpSrasWrflDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimfrompistol_end.rtm";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			speed=2;
+			leftHandIKCurve[]={0,0,0.5,1};
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Binoc: cargo_basebinoc
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_Binoc.rtm";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			speed=-8;
+			rightHandIKCurve[]={0};
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_FromBinoc",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc: cargo_basebinoc
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocPistolActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_Binoc.rtm";
+			aiming="aimingRifleSlingDefault";
+			aimingBody="aimingUpRifleSlingDefault";
+			showHandGun=1;
+			speed=-8;
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_FromBinoc",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_ToBinoc: AmovPercMstpSrasWrflDnon_AwopPercMstpSoptWbinDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_ToBinoc.rtm";
+			speed=1.5789469;
+			leftHandIKCurve[]={0,1,0.15000001,0};
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_ToBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_ToBinoc_End: AmovPercMstpSrasWrflDnon_AwopPercMstpSoptWbinDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_ToBinoc_end.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Binoc",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_FromBinoc: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWrflDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_frombinoc.rtm";
+			speed=1.5789469;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_FromBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_FromBinoc_End: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWrflDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorActions";
+			aiming="aimingDefault";
+			aimingBody="aimingUpDefault";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aim_frombinoc_end.rtm";
+			speed=1.764706;
+			leftHandIKCurve[]={0,0,0.5,1};
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_ToBinoc: AmovPercMstpSrasWpstDnon_AwopPercMstpSoptWbinDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			showHandGun=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_ToBinoc.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_ToBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_ToBinoc_End: AmovPercMstpSrasWpstDnon_AwopPercMstpSoptWbinDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			showHandGun=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_ToBinoc_end.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_Binoc",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_FromBinoc: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWpstDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocActions";
+			showHandGun=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_frombinoc.rtm";
+			speed=1.5789469;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol_FromBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Pistol_FromBinoc_End: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWpstDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorActions";
+			showHandGun=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimpistol_frombinoc_end.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Pistol",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle_Unarmed: cargo_base_idle
+		{
+			actions="dega_passenger_inside_7_leftfloorIdleUnarmedActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idleunarmed.rtm";
+			speed=100000;
+			aiming="aimingNo";
+			aimingBody="aimingNo";
+			weaponIK=0;
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_FromPistol_End",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Aim_ToPistol_End",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Aim_Unarmed_ToBinoc",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die_Pistol",
+				0.1
+			};
+			variantsAI[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed_Idling",
+				1
+			};
+			variantsPlayer[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed_Idling",
+				1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Idle_Unarmed_Idling: dega_passenger_inside_7_leftfloor_Idle
+		{
+			variantsPlayer[]={};
+			headBobStrength=0;
+			soundEnabled=1;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7idleunarmed1.rtm";
+			speed=-10;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc: cargo_basebinoc
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocUnarmedActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimUnarmed_Binoc.rtm";
+			aiming="aimingRifleSlingDefault";
+			aimingBody="aimingUpRifleSlingDefault";
+			showHandGun=0;
+			speed=-8;
+			InterpolateTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Unarmed_FromBinoc",
+				0.1,
+				"dega_passenger_inside_7_leftfloor_Die_Pistol",
+				0.1
+			};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Unarmed_ToBinoc: AmovPercMstpSrasWpstDnon_AwopPercMstpSoptWbinDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocUnarmedActions";
+			showHandGun=0;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimUnarmed_ToBinoc.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Unarmed_ToBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Unarmed_ToBinoc_End: AmovPercMstpSrasWpstDnon_AwopPercMstpSoptWbinDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocUnarmedActions";
+			showHandGun=0;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimUnarmed_ToBinoc_end.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Unarmed_Binoc",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Unarmed_FromBinoc: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWpstDnon
+		{
+			actions="dega_passenger_inside_7_leftfloorBinocUnarmedActions";
+			showHandGun=0;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimUnarmed_frombinoc.rtm";
+			speed=1.5789469;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Aim_Unarmed_FromBinoc_End",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Aim_Unarmed_FromBinoc_End: AwopPercMstpSoptWbinDnon_AmovPercMstpSrasWpstDnon_end
+		{
+			actions="dega_passenger_inside_7_leftfloorIdleUnarmedActions";
+			showHandGun=0;
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7aimUnarmed_frombinoc_end.rtm";
+			speed=1.764706;
+			ConnectTo[]=
+			{
+				"dega_passenger_inside_7_leftfloor_Idle_Unarmed",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Die: DefaultDie
+		{
+			actions="dega_passenger_inside_7_leftfloorDeadActions";
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7die.rtm";
+			speed=1;
+			looped=0;
+			terminal=1;
+			ragdoll=1;
+			ConnectTo[]=
+			{
+				"Unconscious",
+				0.1
+			};
+			InterpolateTo[]={};
+		};
+		class dega_passenger_inside_7_leftfloor_Die_Pistol: dega_passenger_inside_7_leftfloor_Die
+		{
+			file="\dega_vehicles_MH80E\data\Anim\passenger_inside_7_leftfloor\passenger_inside_7diepistol.rtm";
+			actions="dega_passenger_inside_7_leftfloorDeadPistolActions";
+			showHandGun=1;
+		};
 	};
 };
