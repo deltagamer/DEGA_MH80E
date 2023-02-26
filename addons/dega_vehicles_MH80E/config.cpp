@@ -50,7 +50,8 @@ class CfgVehicles
 	{	
 		author="Deltagamer";	
 		editorPreview = "";
-		transportSoldier = 4;	
+		transportSoldier = 4;
+        cargoProxyIndexes[] = {5,6,7,8};		
 		_generalMacro="DEGA_Heli_Transport_01_dynamicLoadout_F";
 		scope = 2;
 		icon="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\map_heli_transport_01_armed_ca.paa";
@@ -236,7 +237,7 @@ class CfgVehicles
 				};
 				selectionFireAnim="";	
 				
-			};/*
+			};
 			class CargoTurret_LeftWindow: CargoTurret 						/// position for Firing from Vehicles
 			{
 				gunnerAction                = "dega_leftgunner_heli_transport_01"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01 
@@ -306,7 +307,7 @@ class CfgVehicles
 				soundAttenuationTurret="HeliAttenuationGunner";
 				showAsCargo = 0;
 				hideWeaponsGunner = 1;
-			};*/
+			};
 			class CargoTurret_LeftDoor: CargoTurret 						/// position for Firing from Vehicles
 			{
 				gunnerGetInAction = "GetInLOW";
