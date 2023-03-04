@@ -402,7 +402,7 @@ class CfgVehicles
 				{
 					CargoTurret_LeftDoor[] = {-65,95};
 				};				
-				gunnerAction                = "passenger_inside_7"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
+				gunnerAction                = "dega_passenger_inside_7_right"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
@@ -410,10 +410,10 @@ class CfgVehicles
 				gunnerName 					= "Passenger (Right Door Seat)";	/// name of the position in the Action menu
 				proxyIndex 					= 2;					/// what cargo proxy is used according to index in the model
 				minElev 				    = -50;
-				maxElev 				    = 15;
+				maxElev 				    = 35;
 				initElev 				    = -15;				
-				minTurn 				    = 25;
-				maxTurn 				    = 80;
+				minTurn 				    = 20;
+				maxTurn 				    = 130;
 				initTurn 				    = 0;
 				isPersonTurret 				= 1;					/// enables firing from vehicle functionality
 				ejectDeadGunner 			= 0;					/// seatbelts included
@@ -454,8 +454,8 @@ class CfgVehicles
 				minElev 				    = -50;
 				maxElev 				    = 35;
 				initElev 				    = -15;				
-				minTurn 				    = -100;
-				maxTurn 				    = -10;
+				minTurn 				    = -115;
+				maxTurn 				    = -25;
 				initTurn 				    = 0;
 				isPersonTurret 				= 1;					/// enables firing from vehicle functionality
 				ejectDeadGunner 			= 0;					/// seatbelts included
