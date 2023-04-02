@@ -49,13 +49,13 @@ class CfgVehicles
 	class DEGA_B_Heli_Transport_01_dynamicLoadout_F : B_Heli_Transport_01_F
 	{	
 		author="Deltagamer";	
-		editorPreview = "";
 		transportSoldier = 4;
         cargoProxyIndexes[] = {5,6,7,8};		
 		_generalMacro="DEGA_Heli_Transport_01_dynamicLoadout_F";
 		scope = 2;
 		icon="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\map_heli_transport_01_armed_ca.paa";
-		picture="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\heli_transport_01_armed_ca.paa";		
+		picture="\A3\Air_F_Beta\Heli_Transport_01\Data\UI\heli_transport_01_armed_ca.paa";
+        editorPreview = "\dega_vehicles_MH80E\data\ui\DEGA_B_Heli_Transport_01_dynamicLoadout_F.jpg";		
 		scopeCurator = 2;
 		scopeArsenal = 2;
 		forceInGarage=1;
@@ -123,7 +123,7 @@ class CfgVehicles
 			{
 				source="door";
 				animPeriod=1.6;
-				initPhase=1;
+				initPhase=0;
 				displayName = "Door (Left)"; 
 				author = "Deltagamer"; 				
 			};
