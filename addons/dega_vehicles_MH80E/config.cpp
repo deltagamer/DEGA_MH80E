@@ -98,7 +98,25 @@ class CfgVehicles
 		{
 			"muzzle_end",
 			"muzzle_end_2"
-		};			
+		};
+/*		
+		multiStructureParts[]=
+		{
+			
+			{
+				"dega_fuelprobe_attachment",
+				"slingcamera"
+			},
+		};
+		class Eventhandlers
+		{
+			init="_this call BIS_fnc_Destroyer01Init;";
+			attributesChanged3DEN="_this call BIS_fnc_Destroyer01PosUpdate;";
+			dragged3DEN="_this call BIS_fnc_Destroyer01PosUpdate;";
+			registeredToWorld3DEN="_this call BIS_fnc_Destroyer01EdenInit;";
+			unregisteredFromWorld3DEN="_this call BIS_fnc_Destroyer01EdenDelete;";
+		};
+*/		
 		class AnimationSources: AnimationSources
 		{
 			class Door_L
@@ -168,30 +186,30 @@ class CfgVehicles
 				showWindow = 1;
 				onlyForPlayer = 1;
 				shortcut = "";
-				condition = "this doorPhase 'Door_L' < 0.5 AND Alive(this) && {(player in [this turretUnit [3]])}";
+				condition = "this doorPhase 'Door_L' < 0.5 AND Alive(this) && {(player in [this turretUnit [3]]) || (player in [this turretUnit [4]])}";
 				statement = "this animateDoor ['door_L', 1]";
-			};
-			class DoorR1_Open: DoorL1_Open
-			{
-				userActionID = 51;
-				displayName = "Open Right Cargo Door";
-				position = "door_R";
-				condition = "this doorPhase 'Door_R' < 0.5 AND Alive(this) && {(player in [this turretUnit [4]])}";
-				statement = "this animateDoor ['door_R', 1]";
 			};
 			class DoorL1_Close: DoorL1_Open
 			{
 				userActionID = 53;
 				displayName = "Close Left Cargo Door";
-				condition = "this doorPhase 'Door_L' > 0.5 AND Alive(this) && {(player in [this turretUnit [3]])}";
+				condition = "this doorPhase 'Door_L' > 0.5 AND Alive(this) && {(player in [this turretUnit [3]]) || (player in [this turretUnit [4]])}";
 				statement = "this animateDoor ['door_L', 0]";
+			};			
+			class DoorR1_Open: DoorL1_Open
+			{
+				userActionID = 51;
+				displayName = "Open Right Cargo Door";
+				position = "door_R";
+				condition = "this doorPhase 'Door_R' < 0.5 AND Alive(this) && {(player in [this turretUnit [5]]) || (player in [this turretUnit [6]])}";
+				statement = "this animateDoor ['door_R', 1]";
 			};
 			class DoorR1_Close: DoorL1_Close
 			{
 				userActionID = 54;
 				displayName = "Close Right Cargo Door";
 				position = "door_R";
-				condition = "this doorPhase 'Door_R' > 0.5 AND Alive(this) && {(player in [this turretUnit [4]])}"; 
+				condition = "this doorPhase 'Door_R' > 0.5 AND Alive(this) && {(player in [this turretUnit [5]]) || (player in [this turretUnit [6]])}"; 
 				statement = "this animateDoor ['door_R', 0]";
 			};
 		};		
@@ -242,7 +260,7 @@ class CfgVehicles
 			{
 				gunnerAction                = "dega_leftgunner_heli_transport_01"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01 
 				gunnerInAction              = "dega_leftgunner_heli_transport_01";	/// generic animation for sitting inside with rifle ready gunner_Heli_Transport_01		
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos gunner";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos gunner dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Left Window Seat)";	/// name of the position in the Action menu
@@ -277,7 +295,7 @@ class CfgVehicles
 			{
 				gunnerAction                = "dega_rightgunner_heli_transport_01"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos gunner2";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos gunner2 dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Right Window Seat)";	/// name of the position in the Action menu
@@ -320,7 +338,7 @@ class CfgVehicles
 				};				
 				gunnerAction                = "dega_passenger_inside_7_left"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos cargo dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Left Door Seat)";	/// name of the position in the Action menu
@@ -362,7 +380,7 @@ class CfgVehicles
 				};				
 				gunnerAction                = "dega_passenger_inside_7_leftfloor"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos cargo dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Left Floor Seat)";	/// name of the position in the Action menu
@@ -404,7 +422,7 @@ class CfgVehicles
 				};				
 				gunnerAction                = "dega_passenger_inside_7_right"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos cargo dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Right Door Seat)";	/// name of the position in the Action menu
@@ -446,7 +464,7 @@ class CfgVehicles
 				};				
 				gunnerAction                = "dega_passenger_inside_7_rightfloor"; /// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
 				gunnerInAction              = "dega_rightgunner_Heli_Transport_01";	/// generic animation for sitting inside with rifle ready  gunner_Heli_Transport_01
-				gunnerCompartments 			= "Compartment2";		/// gunner is not able to switch seats
+				gunnerCompartments 			= "Compartment3";		/// gunner is not able to switch seats
 				memoryPointsGetInGunner 	= "pos cargo";		/// specific memory points to allow choice of position
 				memoryPointsGetInGunnerDir 	= "pos cargo dir";	/// direction of get in action
 				gunnerName 					= "Passenger (Right Floor Seat)";	/// name of the position in the Action menu
@@ -478,6 +496,40 @@ class CfgVehicles
 			};				
 		};
 	};
+	class House_F;
+	class dega_fuelprobe_attachment: House_F
+	{
+		reversed=0;
+		scope=1;
+		scopeCurator=0;
+		author="$STR_A3_author_B01";
+		displayName="DEGA Fuel Probe";
+		editorPreview="\A3\EditorPreviews_F_Destroyer\Data\CfgVehicles\Destroyer_01_hull1.jpg";
+		editorCategory="EdCat_Structures";
+		editorSubcategory="EdSubcat_StaticShips";
+		vehicleClass="Structures_Military";
+		icon="iconObject_1x1";
+		mapsize=50;
+		model="\dega_vehicles_MH80E\dega_fuelprobe.p3d";
+		animated=1;
+		cost=500000;
+		armor=1000000000000000000;
+		hideUnitInfo=1;
+		nameSound="ship";
+		featureType=2;
+		class Hitpoints
+		{
+		};
+		class MarkerLights {};
+		class DestructionEffects {};
+		class Damage
+		{
+			tex[]={};
+			mat[]={};
+		};
+		class AnimationSources {};
+		class UserActions {};
+	};	
 };
 class cfgMagazines
 {
