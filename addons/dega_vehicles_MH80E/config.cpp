@@ -123,7 +123,7 @@ class CfgVehicles
 			{
 				source="door";
 				animPeriod=1.6;
-				initPhase=0;
+				initPhase=1;
 				displayName = "Door (Left)"; 
 				author = "Deltagamer"; 				
 			};
